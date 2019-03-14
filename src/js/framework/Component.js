@@ -1,6 +1,7 @@
 export default class Component {
-    constructor(host) {
+    constructor(host, props = {}) {
         this.host = host;
+        this.props = props;
         this._render();
     }
 
@@ -17,6 +18,11 @@ export default class Component {
                     htmlElement.innerHTML = item;
                     return htmlElement;
                 } else {
+                    if (typeof item.tag === 'function') {
+                        const container = document.createElement('div');
+                        new item.tag(container, item.props)
+                        return container;
+                    }
                     return item;
                 }
             }).forEach(htmlElement => {
