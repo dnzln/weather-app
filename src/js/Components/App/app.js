@@ -30,6 +30,24 @@ export default class App extends Component {
                 unit: 'C',
             },
         },
+        {
+            tag: 'div',
+            content: 'Mi dive',
+            classList: ['nice'],
+            attributes: [
+                {
+                name: 'title',
+                value: 'Me deveing calue',
+                },
+            ],
+        },
+        {
+            tag: Wind,
+            props: {
+                speed: 122,
+                unit: 'mph',
+            },
+        },
         w1,
         ];
     }

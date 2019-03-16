@@ -12,22 +12,10 @@ export default class Component {
         if (typeof content === 'string') {
             this.host.innerHTML = content;
         } else {
-            content.map( item => {
-                if (typeof item === 'string') {
-                    const htmlElement = document.createElement('div');
-                    htmlElement.innerHTML = item;
-                    return htmlElement;
-                } else {
-                    if (typeof item.tag === 'function') {
-                        const container = document.createElement('div');
-                        new item.tag(container, item.props)
-                        return container;
-                    }
-                    return item;
-                }
-            }).forEach(htmlElement => {
-                this.host.appendChild(htmlElement);
-            });
+            content.map( item => this._vDomProtoElementToHtmlElement(item))
+                .forEach(htmlElement => {
+                    this.host.appendChild(htmlElement);
+                });
         }
     }
     
@@ -35,5 +23,18 @@ export default class Component {
         
     }
 
-    
+    _vDomProtoElementToHtmlElement(element) {
+        if (typeof element === 'string') {
+            const htmlElement = document.createElement('div');
+            htmlElement.innerHTML = element;
+            return htmlElement;
+        } else {
+            if (typeof element.tag === 'function') {
+                const container = document.createElement('div');
+                new element.tag(container, element.props)
+                return container;
+            }
+            return element;
+        }
+    }
 }
