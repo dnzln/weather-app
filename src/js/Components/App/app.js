@@ -1,4 +1,4 @@
-import Component from '../../framework/Component';
+import {Component} from '../../framework';
 import {Temperature} from '../Temterature';
 import {Wind} from '../Wind';
 
@@ -14,7 +14,8 @@ export default class App extends Component {
         const w1 = document.createElement('div');
         new Wind(w1, {speed: 100500, unit: 'mph'});
         
-        return ['Temperature range',
+        return [
+        'Temperature range',
         t1,
         {
             tag: Temperature,
