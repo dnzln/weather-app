@@ -5,12 +5,12 @@ import GlobalState from '../../../Services/GlobalState';
 export default class SearchBar extends Component {
     constructor(host, props) {
         super(host, props);
-        GlobalState.watch('currentWeatherData', this.updateMyself);
+        // GlobalState.watch('currentWeatherData', this.updateMyself);
     }
 
     init() {
         this.handleSearchInput = this.handleSearchInput.bind(this);
-        this.updateMyself = this.updateMyself.bind(this);
+        // this.updateMyself = this.updateMyself.bind(this);
         this.state = {
             // searchQuery: value,
             // currentWeatherData: {},
@@ -20,13 +20,21 @@ export default class SearchBar extends Component {
         
     }
 
-    updateMyself(newValue) {
-        this.updateState(newValue);
-        //console.log(this.state);
-    }
+    // updateMyself(newValue) {
+    //     this.updateState(newValue);
+    //     //console.log(this.state);
+    // }
 
     handleSearchInput() {
         let searchInput = this.state.searchQuery = document.getElementById('search');
+        WeatherDataService.getWeatherForecast(searchInput.value)
+            .then(data => {
+                GlobalState.update('forecastWeatherData', {
+                    searchQuery: searchInput.value,
+                    forecastWeatherData: data,
+                });
+            });
+            
         WeatherDataService.getCurrentWeather(searchInput.value)
             .then(data => {
                 GlobalState.update('currentWeatherData', {
@@ -35,13 +43,7 @@ export default class SearchBar extends Component {
                 });
             });
             
-        WeatherDataService.getWeatherForecast(searchInput.value)
-            .then(data => {
-                GlobalState.update('forecastWeatherData', {
-                    searchQuery: searchInput.value,
-                    forecastWeatherData: data,
-                });
-            });
+        
     }
 
     render() {

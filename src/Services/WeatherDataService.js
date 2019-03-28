@@ -12,6 +12,7 @@ class WeatherDataService {
     getWeatherForecast(query = 'Kiev', units = 'metric') {
         return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${APPID}&units=${units}`)
             .then(response => response.json())
+            .then(data => data.list)
     }
 }
   

@@ -23,6 +23,8 @@ import i50n from '../../../icons/50n.svg';
 export default class CurrentWeather extends Component{
     constructor(host, props) {
         super(host, props);
+        GlobalState.watch('currentWeatherData', this.updateMyself);
+        GlobalState.watch('forecastWeatherData', this.updateMyself);
     }
 
     init() {
@@ -126,27 +128,6 @@ export default class CurrentWeather extends Component{
                 content: this.state.currentWeatherData.weather[0].description,
             },
         ];
-    }
-
-    infoBeforeSearchInput() {
-        GlobalState.watch('forecastWeatherData', this.updateMyself);
-        GlobalState.watch('currentWeatherData', this.updateMyself);
-
-        if (!GlobalState.watchers[0]) {
-            WeatherDataService.getCurrentWeather()
-                .then(data => {
-                    GlobalState.update('currentWeatherData', {
-                        currentWeatherData: data,
-                    });
-                });
-                
-            WeatherDataService.getWeatherForecast()
-                .then(data => {
-                    GlobalState.update('forecastWeatherData', {
-                        forecastWeatherData: data,
-                    });
-                });
-        }
     }
 
     properIcon() {

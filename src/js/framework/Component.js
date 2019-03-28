@@ -5,18 +5,18 @@ export default class Component {
         this.host = host;
         this.props = props;
         this.init();
-        this.infoBeforeSearchInput();
-        this.properIcon();
+        // this.infoBeforeSearchInput();
+        //this.properIcon();
         this._render();
     }
 
-    properIcon() {
+    // properIcon() {
         
-    }
+    // }
 
-    infoBeforeSearchInput() {
+    // infoBeforeSearchInput() {
 
-    }
+    // }
 
     init() {
         // binding and optional local state

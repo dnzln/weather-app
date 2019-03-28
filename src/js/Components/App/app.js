@@ -1,18 +1,26 @@
 import {Component} from '../../framework';
-
 import {TopMenu} from '../TopMenu';
 import {SearchBar} from '../SearchBar';
 import {CurrentWeather} from '../CurrentWeather';
 import {WeatherForecast} from '../WeatherForecast';
 import {CurrentWeatherDeatails} from '../CurrentWeatherDeatails';
+import GlobalState from '../../../Services/GlobalState';
+import WeatherDataService from '../../../Services/WeatherDataService';
 
 export default class App extends Component {
     constructor(host) {
         super(host);
     }
 
+    init() {
+        this.infoBeforeSearchInput = this.infoBeforeSearchInput.bind(this);
+    }
+
     
     render() {
+        
+        this.infoBeforeSearchInput();
+
         return [
             {
                 tag: 'header',
@@ -68,6 +76,23 @@ export default class App extends Component {
                 ],
             },
         ];
+    }
+
+    infoBeforeSearchInput() {
+        if (!GlobalState.watchers[0]) {
+            WeatherDataService.getWeatherForecast()
+                .then(data => {
+                    GlobalState.update('forecastWeatherData', {
+                        forecastWeatherData: data,
+                    });
+                });
+            WeatherDataService.getCurrentWeather()
+                .then(data => {
+                    GlobalState.update('currentWeatherData', {
+                        currentWeatherData: data,
+                    });
+                });
+        }
     }
 }
 

@@ -8,6 +8,34 @@ body {
     background: linear-gradient(0, #33b0dd, #2eaef8 );
 }
 
+.pre-loader {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: 220px auto 0;
+}
+
+.pre-loader:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: pre-loader 1.2s linear infinite;
+}
+
+@keyframes pre-loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .link {
     text-decoration: none;
     color: #ffffff;
