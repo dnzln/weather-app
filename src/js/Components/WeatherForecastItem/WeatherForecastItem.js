@@ -11,7 +11,7 @@ export default class WeatherForecastItem extends Component{
             {
                 tag: 'h3',
                 classList: 'block-header',
-                content: props.dayOfWeek,
+                content: 'Mondey',
             },
             {
                 tag: 'img',
@@ -30,7 +30,7 @@ export default class WeatherForecastItem extends Component{
             {
                 tag: 'span',
                 classList: 'temprature-small',
-                content: `${props.temperature}&deg;`,
+                content: '18&deg;',
             },
             {
                 tag: 'span',

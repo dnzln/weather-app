@@ -130,7 +130,7 @@ export default class CurrentWeather extends Component{
 
     infoBeforeSearchInput() {
         GlobalState.watch('forecastWeatherData', this.updateMyself);
-        GlobalState.watch('currentWeatherData', this.updateMyself)
+        GlobalState.watch('currentWeatherData', this.updateMyself);
 
         if (!GlobalState.watchers[0]) {
             WeatherDataService.getCurrentWeather()

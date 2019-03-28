@@ -26,8 +26,8 @@ export default class CurrentWeatherDeatails extends Component{
 
     updateMyself(newValue) {        
         this.updateState(newValue);
-        console.log('Current: ', this.state);
-        console.log('Name: ', this.state.currentWeatherData.name);
+        // console.log('Current: ', this.state);
+        // console.log('Name: ', this.state.currentWeatherData.name);
     } 
 
     render() {
