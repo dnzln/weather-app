@@ -36,7 +36,7 @@ body {
 .main-container {
     width: 100%;
     box-sizing: border-box;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     padding: 0 10px;
     display: flex;
     flex-wrap: wrap;
@@ -355,6 +355,8 @@ body {
     .weather-info .one-day-info,
     .weather-info .details-block {
         width: 48.5%;
+        max-height: 320px;
+        overflow-y: auto;
     }
 
     .forecast .forecast-day {
