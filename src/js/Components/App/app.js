@@ -3,7 +3,7 @@ import {TopMenu} from '../TopMenu';
 import {SearchBar} from '../SearchBar';
 import {CurrentWeather} from '../CurrentWeather';
 import {WeatherForecast} from '../WeatherForecast';
-import {CurrentWeatherDeatails} from '../CurrentWeatherDeatails';
+import {CurrentWeatherDetails} from '../CurrentWeatherDetails';
 import GlobalState from '../../../Services/GlobalState';
 import WeatherDataService from '../../../Services/WeatherDataService';
 
@@ -60,7 +60,7 @@ export default class App extends Component {
                         },
                     },
                     {
-                        tag: CurrentWeatherDeatails,
+                        tag: CurrentWeatherDetails,
                         props: {
                             wrapper: 'section',
                             wrapperClass: ['details-block', 'round-transparent'],
@@ -80,15 +80,18 @@ export default class App extends Component {
 
     infoBeforeSearchInput() {
         if (!GlobalState.watchers[0]) {
-            WeatherDataService.getWeatherForecast()
+            //GlobalState.update('unitSwitcher', {unitSwitcher: 'metric',});
+            WeatherDataService.getWeatherForecastOnQuery()
                 .then(data => {
                     GlobalState.update('forecastWeatherData', {
+                        searchQuery: 'Kiev',
                         forecastWeatherData: data,
                     });
                 });
-            WeatherDataService.getCurrentWeather()
+            WeatherDataService.getCurrentWeatherOnQuery()
                 .then(data => {
                     GlobalState.update('currentWeatherData', {
+                        searchQuery: 'Kiev',
                         currentWeatherData: data,
                     });
                 });

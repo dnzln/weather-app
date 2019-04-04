@@ -32,15 +32,15 @@ export default class CurrentWeather extends Component{
         this.dayOfWeek = this.dayOfWeek.bind(this);
         this.properIcon = this.properIcon.bind(this);
         this.state = {
-            searchQuery: '',
-            currentWeatherData: {
-                main: {},
-                sys: {},
-                weather: [{}],
-                coord: {},
-                clouds: {},
-                wind: {},
-            },
+            // searchQuery: '',
+            // currentWeatherData: {
+            //     main: {},
+            //     sys: {},
+            //     weather: [{}],
+            //     coord: {},
+            //     clouds: {},
+            //     wind: {},
+            // },
         };
     }
 
@@ -50,7 +50,7 @@ export default class CurrentWeather extends Component{
         return names[numberOfDay.getDay()];
     }
 
-    updateMyself(newValue) {        
+    updateMyself(newValue) {
         this.updateState(newValue);
         // console.log('Current: ', this.state);
         // console.log('Name: ', this.state.currentWeatherData.name);
@@ -58,6 +58,14 @@ export default class CurrentWeather extends Component{
     }   
 
     render() {
+        if (!this.state.currentWeatherData) {
+            return [
+                {
+                    tag: 'div',
+                    classList: 'pre-loader',
+                }
+            ];
+        } else {
         return [
             {
                 tag: 'h2',
@@ -128,6 +136,7 @@ export default class CurrentWeather extends Component{
                 content: this.state.currentWeatherData.weather[0].description,
             },
         ];
+        }
     }
 
     properIcon() {

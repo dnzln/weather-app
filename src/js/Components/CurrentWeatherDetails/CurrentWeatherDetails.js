@@ -2,25 +2,27 @@ import Component from '../../framework/Component';
 import WeatherDataService from "../../../Services/WeatherDataService";
 import GlobalState from '../../../Services/GlobalState';
 
-export default class CurrentWeatherDeatails extends Component{
+export default class CurrentWeatherDetails extends Component{
     constructor(host, props) {
         super(host, props);
         GlobalState.watch('currentWeatherData', this.updateMyself);
         GlobalState.watch('forecastWeatherData', this.updateMyself);
+        GlobalState.watch('unitSwitcher', this.updateMyself);
     }
 
     init() {
         this.updateMyself = this.updateMyself.bind(this);
+        this.windSpeed = this.windSpeed.bind(this);
         this.state = {
             searchQuery: '',
-            currentWeatherData: {
-                main: {},
-                sys: {},
-                weather: [{}],
-                coord: {},
-                clouds: {},
-                wind: {},
-            },
+            // currentWeatherData: {
+            //     main: {},
+            //     sys: {},
+            //     weather: [{}],
+            //     coord: {},
+            //     clouds: {},
+            //     wind: {},
+            // },
         };
     }
 
@@ -28,14 +30,26 @@ export default class CurrentWeatherDeatails extends Component{
         this.updateState(newValue);
         // console.log('Current: ', this.state);
         // console.log('Name: ', this.state.currentWeatherData.name);
-    } 
+    }
+
+    windSpeed() {
+        return this.state.unitSwitcher == undefined ? 'Wind speed (m/s)' : this.state.unitSwitcher == 'metric' ? 'Wind speed (m/s)' : 'Wind speed (mph)';
+    }
 
     render() {
+        if (!this.state.currentWeatherData) {
+            return [
+                {
+                    tag: 'div',
+                    classList: 'pre-loader',
+                }
+            ];
+        } else {
         return [
             {
                 tag: 'h3',
                 classList: 'block-header',
-                content: 'In Deatail',
+                content: 'In Detail',
             },
             {
                 tag: 'table',
@@ -48,7 +62,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: 'Humidity',
+                                content: 'Humidity (%)',
                             },
                             {
                                 tag: 'td',
@@ -57,7 +71,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: `${this.state.currentWeatherData.main.humidity}%`,
+                                content: `${this.state.currentWeatherData.main.humidity}`,
                             },
                         ],
                     },
@@ -68,7 +82,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: 'Cloudiness',
+                                content: 'Cloudiness (%)',
                             },
                             {
                                 tag: 'td',
@@ -77,7 +91,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: `${Math.round(this.state.currentWeatherData.clouds.all)}%`,
+                                content: `${Math.round(this.state.currentWeatherData.clouds.all)}`,
                             },
                         ],
                     },
@@ -88,7 +102,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: 'Pressure',
+                                content: 'Pressure (hPa)',
                             },
                             {
                                 tag: 'td',
@@ -97,7 +111,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: `${Math.round(this.state.currentWeatherData.main.pressure)} hPa`,
+                                content: this.state.currentWeatherData.main.pressure,
                             },
                         ],
                     },
@@ -108,7 +122,7 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: 'Wind speed',
+                                content: 'Visibility (m)',
                             },
                             {
                                 tag: 'td',
@@ -117,7 +131,27 @@ export default class CurrentWeatherDeatails extends Component{
                             {
                                 tag: 'td',
                                 classList: 'cell',
-                                content: `${Math.round(this.state.currentWeatherData.wind.speed)} m/s`,
+                                content: `${Math.round(this.state.currentWeatherData.visibility)}`,
+                            },
+                        ],
+                    },
+                    {
+                        tag: 'tr',
+                        classList: 'row',
+                        childrens: [
+                            {
+                                tag: 'td',
+                                classList: 'cell',
+                                content: this.windSpeed(),
+                            },
+                            {
+                                tag: 'td',
+                                classList: ['cell', 'decorated'],
+                            },
+                            {
+                                tag: 'td',
+                                classList: 'cell',
+                                content: this.state.currentWeatherData.wind.speed,
                             },
                         ],
                     },
@@ -141,29 +175,9 @@ export default class CurrentWeatherDeatails extends Component{
                             },
                         ],
                     },
-                    {
-                        tag: 'tr',
-                        classList: 'row',
-                        childrens: [
-                            {
-                                tag: 'td',
-                                classList: 'cell',
-                                content: 'Visibility',
-                            },
-                            {
-                                tag: 'td',
-                                classList: ['cell', 'decorated'],
-                            },
-                            {
-                                tag: 'td',
-                                classList: 'cell',
-                                content: `${Math.round(this.state.currentWeatherData.visibility)} m`,
-                            },
-                        ],
-                    },
-                    
                 ],
             },
         ];
+    }
     }
 }

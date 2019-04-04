@@ -9,10 +9,10 @@ body {
 }
 
 .pre-loader {
-    display: inline-block;
+    display: block;
     width: 64px;
     height: 64px;
-    margin: 220px auto 0;
+    margin: 110px auto;
 }
 
 .pre-loader:after {
@@ -34,6 +34,10 @@ body {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.min-temp {
+    color: #dddcdc;
 }
 
 .link {
