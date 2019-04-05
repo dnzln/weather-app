@@ -85,15 +85,22 @@ export default class TopMenu extends Component{
                                     },
                                 ],
                             },
+                            {
+                                tag: FavouriteLocations,
+                                props: {
+                                    wrapper: 'div',
+                                    wrapperClass: ['pop-favor', 'round-transparent'],
+                                },
+                            },
                         ],
                     },
-                    {
-                        tag: FavouriteLocations,
-                        props: {
-                            wrapper: 'div',
-                            wrapperClass: ['pop-favor', 'round-transparent'],
-                        },
-                    },
+                    // {
+                    //     tag: FavouriteLocations,
+                    //     props: {
+                    //         wrapper: 'div',
+                    //         wrapperClass: ['pop-favor', 'round-transparent'],
+                    //     },
+                    // },
                 ],
             },
             {
@@ -115,15 +122,22 @@ export default class TopMenu extends Component{
                                     },
                                 ],
                             },
+                            {
+                                tag: SearchHistory,
+                                props: {
+                                    wrapper: 'div',
+                                    wrapperClass: ['pop-history', 'round-transparent'],
+                                },
+                            },
                         ],
                     },
-                    {
-                        tag: SearchHistory,
-                        props: {
-                            wrapper: 'div',
-                            wrapperClass: ['pop-history', 'round-transparent'],
-                        },
-                    },
+                    // {
+                    //     tag: SearchHistory,
+                    //     props: {
+                    //         wrapper: 'div',
+                    //         wrapperClass: ['pop-history', 'round-transparent'],
+                    //     },
+                    // },
                 ],
             },
             {

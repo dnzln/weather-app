@@ -17,21 +17,21 @@ export default class SearchHistory extends Component{
         this.handleCleanList = this.handleCleanList.bind(this);
         this.handleListClick = this.handleListClick.bind(this);
         this.state = {
-            favouriteList: [],
+            historyList: [],
         }
     }
 
     updateMyself(newValue) {
         console.log(newValue.searchQuery);
-        if (newValue.searchQuery) {
-            this.state.favouriteList.push(newValue.searchQuery);
+        if (newValue.searchQuery && this.state.historyList.indexOf(newValue.searchQuery) == -1) {
+            this.state.historyList.unshift(newValue.searchQuery);
         }
         this.updateState(newValue);
         this._render();
     }
 
     handleCleanList() {
-        this.state.favouriteList = [];
+        this.state.historyList = [];
         this._render();
     }
 
@@ -45,7 +45,7 @@ export default class SearchHistory extends Component{
         WeatherDataService.getCurrentWeatherOnQuery(city, this.state.unitSwitcher)
             .then(data => {
                 GlobalState.update('currentWeatherData', {
-                    //searchQuery: data.name,
+                    searchQuery: data.name,
                     currentWeatherData: data,
                 });
             });
@@ -68,8 +68,8 @@ export default class SearchHistory extends Component{
                 childrens: []
             }
             );
-        for (let i = 0; i < this.state.favouriteList.length; i++) {
-            let city = this.state.favouriteList[i];
+        for (let i = 0; i < this.state.historyList.length; i++) {
+            let city = this.state.historyList[i];
             let historyObject = this;
             renderArray[1].childrens.push(
                 {

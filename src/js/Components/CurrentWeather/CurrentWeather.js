@@ -25,13 +25,17 @@ export default class CurrentWeather extends Component{
         super(host, props);
         GlobalState.watch('currentWeatherData', this.updateMyself);
         GlobalState.watch('forecastWeatherData', this.updateMyself);
+        GlobalState.watch('searchQuery', this.updateMyself);
+        GlobalState.watch('favCityList', this.updateMyself);
     }
 
     init() {
         this.updateMyself = this.updateMyself.bind(this);
         this.dayOfWeek = this.dayOfWeek.bind(this);
         this.properIcon = this.properIcon.bind(this);
+        this.handlerFavorButton = this.handlerFavorButton.bind(this);
         this.state = {
+            favCityList: [],
             // searchQuery: '',
             // currentWeatherData: {
             //     main: {},
@@ -55,7 +59,22 @@ export default class CurrentWeather extends Component{
         // console.log('Current: ', this.state);
         // console.log('Name: ', this.state.currentWeatherData.name);
         // console.log('status: ', GlobalState.watchers['currentWeatherData']);
-    }   
+    }
+
+    handlerFavorButton() {
+        let favButton = document.getElementById('favor');
+        if (!favButton.checked) {
+            console.log('liked');
+            this.state.favCityList.push(this.state.searchQuery)
+            GlobalState.update('favCityList', {favCityList: this.state.favCityList});
+        } else {
+            console.log('disliked');
+            let i = this.state.favCityList.indexOf(this.state.searchQuery);
+            this.state.favCityList.splice(i, 1);
+            GlobalState.update('favCityList', {favCityList: this.state.favCityList});
+        }
+        console.log('fav list ',this.state.favCityList);
+    }
 
     render() {
         if (!this.state.currentWeatherData) {
@@ -66,6 +85,10 @@ export default class CurrentWeather extends Component{
                 }
             ];
         } else {
+        let isChecked;
+        if (this.state.favCityList.indexOf(this.state.currentWeatherData.name) != -1) {
+            isChecked = 'checked';   
+        }
         return [
             {
                 tag: 'h2',
@@ -75,6 +98,9 @@ export default class CurrentWeather extends Component{
             {
                 tag: 'div',
                 classList: 'fav-button',
+                eventHandlers: {
+                    click: this.handlerFavorButton,
+                },
                 childrens: [
                     {
                         tag: 'input',
@@ -91,6 +117,10 @@ export default class CurrentWeather extends Component{
                             {
                                 name: 'id',
                                 value: 'favor',
+                            },
+                            {
+                                name: isChecked,
+                                value: isChecked,
                             },
                         ],
                     },

@@ -167,7 +167,8 @@ body {
     background: url(../icons/star0.svg) no-repeat;
     background-size: 40px;
     position: absolute;
-    right: 5px;
+    right: 1px;
+    top: 4px;
 }
 
 .add-to-fav:checked + .favor-label::after {
@@ -178,7 +179,8 @@ body {
     background: url(../icons/star1.svg) no-repeat;
     background-size: 40px;
     position: absolute;
-    right: 5px;
+    right: 1px;
+    top: 4px;
 }
 
 .units-label::after {
@@ -289,10 +291,14 @@ body {
     color: #ffffff62;
 }
 
-.forecast-day:hover,
-.options-item.round-transparent:hover {
+.forecast-day:hover{
     cursor: pointer;
     background-color: #aad1f53b;
+}
+
+.options-item.round-transparent:hover {
+    cursor: pointer;
+    background-color: #3a77b198;
 }
 
 .options-item:hover,
@@ -302,8 +308,10 @@ body {
 }
 
 .unit-change:focus + .units-label,
-.add-to-fav:focus + .favor-label {
-    outline: 3px solid #7c97d1;
+.add-to-fav:focus + .favor-label,
+.search-input:focus,
+.list-button > .link:focus {
+    outline: 2px solid #ffffff3d;
 }
 
 .clean-button {
@@ -342,7 +350,9 @@ body {
 }
 
 .options-item:first-of-type:hover .pop-favor,
-.options-item:nth-of-type(2):hover .pop-history {
+.options-item:nth-of-type(2):hover .pop-history,
+.options-item:first-of-type .list-button .link:focus + .pop-favor,
+.options-item:nth-of-type(2) .list-button .link:focus + .pop-history {
     display: block;
 }
 
@@ -422,6 +432,16 @@ body {
     .units-label::after,
     .unit-change:checked + .units-label::after {
         font-size: 18px;
+    }
+
+    .favor-label::after {
+        right: 6px;
+        top: 4px;
+    }
+
+    .add-to-fav:checked + .favor-label::after {
+        right: 6px;
+        top: 4px;
     }
 }
 
