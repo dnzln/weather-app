@@ -91,7 +91,6 @@ export default class App extends Component {
             WeatherDataService.getCurrentWeatherOnQuery()
                 .then(data => {
                     GlobalState.update('currentWeatherData', {
-                        searchQuery: 'Kiev',
                         currentWeatherData: data,
                     });
                 });

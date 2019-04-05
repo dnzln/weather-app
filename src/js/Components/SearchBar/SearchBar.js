@@ -33,7 +33,6 @@ export default class SearchBar extends Component {
         WeatherDataService.getWeatherForecastOnQuery(searchInput.value, this.state.unitSwitcher)
             .then(data => {
                 GlobalState.update('forecastWeatherData', {
-                    searchQuery: searchInput.value,
                     forecastWeatherData: data,
                 });
             });
@@ -41,7 +40,7 @@ export default class SearchBar extends Component {
         WeatherDataService.getCurrentWeatherOnQuery(searchInput.value, this.state.unitSwitcher)
             .then(data => {
                 GlobalState.update('currentWeatherData', {
-                    searchQuery: searchInput.value,
+                    searchQuery: data.name,
                     currentWeatherData: data,
                 });
             });
@@ -53,7 +52,6 @@ export default class SearchBar extends Component {
             WeatherDataService.getWeatherForecastOnCoord(coord[0], coord[1], this.state.unitSwitcher)
             .then(data => {
                 GlobalState.update('forecastWeatherData', {
-                    searchQuery: searchInput.value,
                     forecastWeatherData: data,
                 });
             });
@@ -61,7 +59,7 @@ export default class SearchBar extends Component {
             WeatherDataService.getCurrentWeatherOnCoord(coord[0], coord[1], this.state.unitSwitcher)
             .then(data => {
                 GlobalState.update('currentWeatherData', {
-                    searchQuery: searchInput.value,
+                    searchQuery: data.name,
                     currentWeatherData: data,
                 });
             });
