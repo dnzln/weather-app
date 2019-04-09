@@ -80,7 +80,25 @@ export default class App extends Component {
 
     infoBeforeSearchInput() {
         if (!GlobalState.watchers[0]) {
-            //GlobalState.update('unitSwitcher', {unitSwitcher: 'metric',});
+            navigator.geolocation.getCurrentPosition(userLocation, errorCase);
+
+            function userLocation(pos) {
+                WeatherDataService.getWeatherForecastOnCoord(pos.coords.latitude, pos.coords.longitude)
+                    .then(data => {
+                        GlobalState.update('forecastWeatherData', {
+                            forecastWeatherData: data,
+                        });
+                    });
+                WeatherDataService.getCurrentWeatherOnCoord(pos.coords.latitude, pos.coords.longitude)
+                    .then(data => {
+                        GlobalState.update('currentWeatherData', {
+                            searchQuery: data.name,
+                            currentWeatherData: data,
+                        });
+                    });
+            }
+
+            function errorCase() {
             WeatherDataService.getWeatherForecastOnQuery()
                 .then(data => {
                     GlobalState.update('forecastWeatherData', {
@@ -94,6 +112,7 @@ export default class App extends Component {
                         currentWeatherData: data,
                     });
                 });
+            }
         }
     }
 }
