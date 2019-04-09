@@ -5,47 +5,37 @@ import GlobalState from '../../../Services/GlobalState';
 export default class SearchBar extends Component {
     constructor(host, props) {
         super(host, props);
-        // GlobalState.watch('currentWeatherData', this.updateMyself);
         GlobalState.watch('unitSwitcher', this.updateMyself);
     }
 
     init() {
         this.handleSearchInput = this.handleSearchInput.bind(this);
         this.updateMyself = this.updateMyself.bind(this);
-        this.state = {
-            // searchQuery: value,
-            // currentWeatherData: {},
-        };
-
-        // first init request to display default weather info
-        
+        this.state = {};
     }
 
     updateMyself(newValue) {
         this.updateState(newValue);
-        //console.log(this.state);
     }
 
     handleSearchInput() {
         let searchInput = document.getElementById('search');
         if (searchInput.value.search(/[a-z]/) != -1) {
-            console.log('query');
-        WeatherDataService.getWeatherForecastOnQuery(searchInput.value, this.state.unitSwitcher)
-            .then(data => {
-                GlobalState.update('forecastWeatherData', {
-                    forecastWeatherData: data,
+            WeatherDataService.getWeatherForecastOnQuery(searchInput.value, this.state.unitSwitcher)
+                .then(data => {
+                    GlobalState.update('forecastWeatherData', {
+                        forecastWeatherData: data,
+                    });
                 });
-            });
-            
-        WeatherDataService.getCurrentWeatherOnQuery(searchInput.value, this.state.unitSwitcher)
-            .then(data => {
-                GlobalState.update('currentWeatherData', {
-                    searchQuery: data.name,
-                    currentWeatherData: data,
+                
+            WeatherDataService.getCurrentWeatherOnQuery(searchInput.value, this.state.unitSwitcher)
+                .then(data => {
+                    GlobalState.update('currentWeatherData', {
+                        searchQuery: data.name,
+                        currentWeatherData: data,
+                    });
                 });
-            });
         } else {
-            console.log('coord');
             let coord = searchInput.value.replace(/,/g, ' ');
             coord = coord.split(' ');
             coord = coord.filter(el => el);

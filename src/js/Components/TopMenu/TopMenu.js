@@ -16,6 +16,7 @@ export default class TopMenu extends Component{
     init() {
         this.handleUnitChange = this.handleUnitChange.bind(this);
         this.updateMyself = this.updateMyself.bind(this);
+        this.dataRequest = this.dataRequest.bind(this);
     }
 
     updateMyself(newValue) {        
@@ -26,42 +27,31 @@ export default class TopMenu extends Component{
         this.state = Object.assign({}, this.state, newValue);
     }
 
+    dataRequest(units) {
+        GlobalState.update('unitSwitcher', {unitSwitcher: units,});
+
+        WeatherDataService.getWeatherForecastOnQuery(this.state.searchQuery, this.state.unitSwitcher)
+            .then(data => {
+                GlobalState.update('forecastWeatherData', {
+                    forecastWeatherData: data,
+                });
+            });
+
+        WeatherDataService.getCurrentWeatherOnQuery(this.state.searchQuery, this.state.unitSwitcher)
+            .then(data => {
+                GlobalState.update('currentWeatherData', {
+                    currentWeatherData: data,
+                });
+            });
+    }
+
     handleUnitChange() {
         let switcher = document.getElementById('units');
         if (!switcher.checked) {
-            GlobalState.update('unitSwitcher', {unitSwitcher: 'metric',});
-            WeatherDataService.getWeatherForecastOnQuery(this.state.searchQuery, this.state.unitSwitcher)
-                .then(data => {
-                    GlobalState.update('forecastWeatherData', {
-                        //searchQuery: this.state.query,
-                        forecastWeatherData: data,
-                    });
-                });
-
-            WeatherDataService.getCurrentWeatherOnQuery(this.state.searchQuery, this.state.unitSwitcher)
-                .then(data => {
-                    GlobalState.update('currentWeatherData', {
-                        currentWeatherData: data,
-                    });
-                });
+            this.dataRequest('metric');
         } else {
-            GlobalState.update('unitSwitcher', {unitSwitcher: 'imperial',});
-            WeatherDataService.getWeatherForecastOnQuery(this.state.searchQuery, this.state.unitSwitcher)
-                .then(data => {
-                    GlobalState.update('forecastWeatherData', {
-                        //searchQuery: this.state.query,
-                        forecastWeatherData: data,
-                    });
-                });
-
-            WeatherDataService.getCurrentWeatherOnQuery(this.state.searchQuery, this.state.unitSwitcher)
-                .then(data => {
-                    GlobalState.update('currentWeatherData', {
-                        currentWeatherData: data,
-                    });
-                });
+            this.dataRequest('imperial');
         }
-        console.log('sttttate',this.state);
     }
 
     render() {
@@ -94,13 +84,6 @@ export default class TopMenu extends Component{
                             },
                         ],
                     },
-                    // {
-                    //     tag: FavouriteLocations,
-                    //     props: {
-                    //         wrapper: 'div',
-                    //         wrapperClass: ['pop-favor', 'round-transparent'],
-                    //     },
-                    // },
                 ],
             },
             {
@@ -131,13 +114,6 @@ export default class TopMenu extends Component{
                             },
                         ],
                     },
-                    // {
-                    //     tag: SearchHistory,
-                    //     props: {
-                    //         wrapper: 'div',
-                    //         wrapperClass: ['pop-history', 'round-transparent'],
-                    //     },
-                    // },
                 ],
             },
             {

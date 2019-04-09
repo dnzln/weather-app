@@ -17,18 +17,13 @@ export default class FavouriteLocations extends Component{
         this.updateMyself = this.updateMyself.bind(this);
         this.handleListClick = this.handleListClick.bind(this);
         this.handleCleanList = this.handleCleanList.bind(this);
-
         this.state = {
             favCityList: [],
         }
     }
 
     updateMyself(newValue) {
-        // if (newValue.unitSwitcher) {
-        //     this.state.favouriteList.push(newValue.unitSwitcher);
-        // }
         this.updateState(newValue);
-        // this._render();
     }
 
     handleCleanList() {
@@ -86,34 +81,5 @@ export default class FavouriteLocations extends Component{
         }
 
         return renderArray;
-
-        // return [
-        //     {
-        //         tag: 'button',
-        //         content: 'Clean',
-        //         classList: 'clean-button',
-        //     },
-        //     {
-        //         tag: 'ul',
-        //         classList: 'favor-city-list',
-        //         childrens: [
-        //             {
-        //                 tag: 'li',
-        //                 classList: 'city-item',
-        //                 content: 'London',
-        //             },
-        //             {
-        //                 tag: 'li',
-        //                 classList: 'city-item',
-        //                 content: 'Donetsk',
-        //             },
-        //             {
-        //                 tag: 'li',
-        //                 classList: 'city-item',
-        //                 content: 'Lviv',
-        //             },
-        //         ],
-        //     },
-        // ];
     }
 }

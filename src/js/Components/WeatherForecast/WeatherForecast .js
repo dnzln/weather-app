@@ -1,6 +1,5 @@
 import Component from '../../framework/Component';
 import {WeatherForecastItem} from '../WeatherForecastItem';
-import WeatherDataService from "../../../Services/WeatherDataService";
 import GlobalState from '../../../Services/GlobalState';
 
 export default class WeatherForecast extends Component {
@@ -16,20 +15,11 @@ export default class WeatherForecast extends Component {
         this.getStartDay = this.getStartDay.bind(this);
         this.getMinMaxTemp = this.getMinMaxTemp.bind(this);
         this.state = {
-            // forecastWeatherData: {
-            //     list: [{}],
-            // },
-            // currentWeatherData: {
-            //     weather: [],
-            // },
         };
     }
 
     updateMyself(newValue) {        
-        this.updateState(newValue);
-         console.log('State: ', this.state);
-        // console.log('Current weater: ', this.state.currentWeatherData.weather[0].description);
-        // console.log('Forecast dt: ', this.state.forecastWeatherData.list[1].dt);    
+        this.updateState(newValue);    
     }
 
     getStartDay() {
@@ -38,20 +28,13 @@ export default class WeatherForecast extends Component {
         do {
             if (this.state.forecastWeatherData.list[i].dt_txt.substring(8,10) != this.state.forecastWeatherData.list[i+1].dt_txt.substring(8,10)) startFrom = i + 1;
             i++;
-        } while (startFrom == undefined)
-        // if (startFrom == 8) startFrom += 4;
-        // if (startFrom == 6) startFrom += 1;
-        // if (startFrom == 5) startFrom += 2;
-        // if (startFrom == 4) startFrom += 3;
-        // if (startFrom == 3) startFrom += 2;
-        // if (startFrom == 2) startFrom += 3;
-        // if (startFrom == 1) startFrom += 4;        
+        } while (startFrom == undefined)      
         return startFrom;
     }
 
     getMinMaxTemp(j) {
-        let min = 50;
-        let max = -50;
+        let min = 150;
+        let max = -150;
         for (let i = j; i < j + 8; i++) {
             if (this.state.forecastWeatherData.list[i] != undefined) {
                 if (this.state.forecastWeatherData.list[i].main.temp < min) min = this.state.forecastWeatherData.list[i].main.temp;
@@ -93,47 +76,9 @@ export default class WeatherForecast extends Component {
                         },
                     }
                 );
-                console.log(this.state.forecastWeatherData.list[i].dt_txt, i)
                 i += 8;
             } while (i <= 39)
         return itemsArray;
-        // [
-        //     {
-        //         tag: WeatherForecastItem,
-        //         props: {
-        //             wrapper: 'div',
-        //             wrapperClass: ['forecast-day'],
-        //         },
-        //     },
-        //     {
-        //         tag: WeatherForecastItem,
-        //         props: {
-        //             wrapper: 'div',
-        //             wrapperClass: ['forecast-day'],
-        //         },
-        //     },
-        //     {
-        //         tag: WeatherForecastItem,
-        //         props: {
-        //             wrapper: 'div',
-        //             wrapperClass: ['forecast-day'],
-        //         },
-        //     },
-        //     {
-        //         tag: WeatherForecastItem,
-        //         props: {
-        //             wrapper: 'div',
-        //             wrapperClass: ['forecast-day'],
-        //         },
-        //     },
-        //     {
-        //         tag: WeatherForecastItem,
-        //         props: {
-        //             wrapper: 'div',
-        //             wrapperClass: ['forecast-day'],
-        //         },
-        //     },
-        // ]; 
         }
     }
 }

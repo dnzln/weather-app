@@ -1,22 +1,10 @@
-import GlobalState from "../../Services/GlobalState";
-
 export default class Component {
     constructor(host, props = {}) {
         this.host = host;
         this.props = props;
         this.init();
-        // this.infoBeforeSearchInput();
-        //this.properIcon();
         this._render();
     }
-
-    // properIcon() {
-        
-    // }
-
-    // infoBeforeSearchInput() {
-
-    // }
 
     init() {
         // binding and optional local state
@@ -43,7 +31,7 @@ export default class Component {
 
     /* @returns {string|[string|HTMLElement|Component]} */    
     render() {
-        return 'OMG! They wanna see me!!!!!! Aaaaaa';
+        return 'Some mistake whit render(), see component render';
     }
 
     /**

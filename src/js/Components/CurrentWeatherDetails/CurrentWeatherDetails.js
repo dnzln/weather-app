@@ -1,5 +1,4 @@
 import Component from '../../framework/Component';
-import WeatherDataService from "../../../Services/WeatherDataService";
 import GlobalState from '../../../Services/GlobalState';
 
 export default class CurrentWeatherDetails extends Component{
@@ -15,21 +14,11 @@ export default class CurrentWeatherDetails extends Component{
         this.windSpeed = this.windSpeed.bind(this);
         this.state = {
             searchQuery: '',
-            // currentWeatherData: {
-            //     main: {},
-            //     sys: {},
-            //     weather: [{}],
-            //     coord: {},
-            //     clouds: {},
-            //     wind: {},
-            // },
         };
     }
 
     updateMyself(newValue) {        
         this.updateState(newValue);
-        // console.log('Current: ', this.state);
-        // console.log('Name: ', this.state.currentWeatherData.name);
     }
 
     windSpeed() {

@@ -22,7 +22,6 @@ export default class SearchHistory extends Component{
     }
 
     updateMyself(newValue) {
-        console.log(newValue.searchQuery);
         if (newValue.searchQuery && this.state.historyList.indexOf(newValue.searchQuery) == -1) {
             this.state.historyList.unshift(newValue.searchQuery);
         }
@@ -84,34 +83,5 @@ export default class SearchHistory extends Component{
         }
 
         return renderArray;
-
-        // return [
-        //     {
-        //         tag: 'button',
-        //         content: 'Clean',
-        //         classList: 'clean-button',
-        //     },
-        //     {
-        //         tag: 'ul',
-        //         classList: 'history-city-list',
-        //         childrens: [
-        //             {
-        //                 tag: 'li',
-        //                 classList: 'city-item',
-        //                 content: 'Minsk',
-        //             },
-        //             {
-        //                 tag: 'li',
-        //                 classList: 'city-item',
-        //                 content: 'Donetsk',
-        //             },
-        //             {
-        //                 tag: 'li',
-        //                 classList: 'city-item',
-        //                 content: 'Kiev',
-        //             },
-        //         ],
-        //     },
-        // ];
     }
 }

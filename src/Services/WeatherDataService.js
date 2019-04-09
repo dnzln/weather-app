@@ -1,6 +1,3 @@
-import {CurrentWeather} from '../../src/js/Components/CurrentWeather';
-
-
 const APPID = '88eb77ad52892a585149123b21737396';
 
 class WeatherDataService {

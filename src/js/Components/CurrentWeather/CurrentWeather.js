@@ -1,24 +1,15 @@
 import Component from '../../framework/Component';
-import WeatherDataService from "../../../Services/WeatherDataService";
 import GlobalState from '../../../Services/GlobalState';
 import i01d from '../../../icons/01d.svg';
 import i01n from '../../../icons/01n.svg';
 import i02d from '../../../icons/02d.svg';
 import i02n from '../../../icons/02n.svg';
 import i03d from '../../../icons/03d.svg';
-import i03n from '../../../icons/03n.svg';
-import i04d from '../../../icons/04d.svg';
-import i04n from '../../../icons/04n.svg';
 import i09d from '../../../icons/09d.svg';
-import i09n from '../../../icons/09n.svg';
 import i10d from '../../../icons/10d.svg';
-import i10n from '../../../icons/10n.svg';
 import i11d from '../../../icons/11d.svg';
-import i11n from '../../../icons/11n.svg';
 import i13d from '../../../icons/13d.svg';
-import i13n from '../../../icons/13n.svg';
 import i50d from '../../../icons/50d.svg';
-import i50n from '../../../icons/50n.svg';
 
 export default class CurrentWeather extends Component{
     constructor(host, props) {
@@ -36,15 +27,6 @@ export default class CurrentWeather extends Component{
         this.handlerFavorButton = this.handlerFavorButton.bind(this);
         this.state = {
             favCityList: [],
-            // searchQuery: '',
-            // currentWeatherData: {
-            //     main: {},
-            //     sys: {},
-            //     weather: [{}],
-            //     coord: {},
-            //     clouds: {},
-            //     wind: {},
-            // },
         };
     }
 
@@ -56,24 +38,18 @@ export default class CurrentWeather extends Component{
 
     updateMyself(newValue) {
         this.updateState(newValue);
-        // console.log('Current: ', this.state);
-        // console.log('Name: ', this.state.currentWeatherData.name);
-        // console.log('status: ', GlobalState.watchers['currentWeatherData']);
     }
 
     handlerFavorButton() {
         let favButton = document.getElementById('favor');
         if (!favButton.checked) {
-            console.log('liked');
             this.state.favCityList.push(this.state.searchQuery)
             GlobalState.update('favCityList', {favCityList: this.state.favCityList});
         } else {
-            console.log('disliked');
             let i = this.state.favCityList.indexOf(this.state.searchQuery);
             this.state.favCityList.splice(i, 1);
             GlobalState.update('favCityList', {favCityList: this.state.favCityList});
         }
-        console.log('fav list ',this.state.favCityList);
     }
 
     render() {
