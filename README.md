@@ -1,3 +1,3 @@
 ### Weather app
 
-[Demo](https://dnzln.github.io/html5-form/)
+[Demo](https://dnzln.github.io/weather-app/)
