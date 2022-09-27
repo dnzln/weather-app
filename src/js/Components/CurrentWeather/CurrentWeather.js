@@ -1,5 +1,3 @@
-import Component from '../../framework/Component';
-import GlobalState from '../../../Services/GlobalState';
 import i01d from '../../../icons/01d.svg';
 import i01n from '../../../icons/01n.svg';
 import i02d from '../../../icons/02d.svg';
@@ -10,6 +8,8 @@ import i10d from '../../../icons/10d.svg';
 import i11d from '../../../icons/11d.svg';
 import i13d from '../../../icons/13d.svg';
 import i50d from '../../../icons/50d.svg';
+import GlobalState from '../../../Services/GlobalState';
+import Component from '../../framework/Component';
 
 export default class CurrentWeather extends Component{
     constructor(host, props) {
